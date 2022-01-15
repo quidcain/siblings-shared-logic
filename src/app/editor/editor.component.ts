@@ -15,6 +15,9 @@ export class EditorComponent {
   @Output()
   public valueChange = new EventEmitter<string>();
 
+  @Output()
+  public editToggled = new EventEmitter<boolean>();
+
   public _value = new FormControl('');
 
   public isEdit: boolean = false;
@@ -23,6 +26,7 @@ export class EditorComponent {
 
   public toggleEditInput(shouldEnableEdit: boolean): void {
     this.isEdit = shouldEnableEdit;
+    this.editToggled.emit(shouldEnableEdit);
     if (!shouldEnableEdit) {
       this.valueChange.emit(this._value.value);
     }

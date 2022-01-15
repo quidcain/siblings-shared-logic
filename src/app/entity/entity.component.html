@@ -1,2 +1,8 @@
-<app-editor [(value)]="header"></app-editor>
-<p>entity works!</p>
+<app-editor-wrapper>
+  <div>
+    <app-editor [(value)]="header"></app-editor>
+  </div>
+  <div>
+    <button #renameButton>rename</button>
+  </div>
+</app-editor-wrapper>
