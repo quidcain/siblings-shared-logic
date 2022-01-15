@@ -1,8 +1,10 @@
 <app-editor-wrapper>
   <div>
-    <app-editor [(value)]="header"></app-editor>
+    <app-editor *ngIf="isEditorShown" [(value)]="header"></app-editor>
   </div>
   <div>
-    <button #renameButton>rename</button>
+    <button *ngIf="isRenameButtonShown" #renameButton>rename</button>
   </div>
+  <button (click)="toggleEditor()">toggle the editor</button>
+  <button (click)="toggleRenameButton()">toggle the renameButton</button>
 </app-editor-wrapper>

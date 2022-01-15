@@ -1,15 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-entity',
   templateUrl: './entity.component.html',
   styleUrls: ['./entity.component.scss']
 })
-export class EntityComponent implements OnInit {
+export class EntityComponent {
   public header = "123";
-  constructor() { }
+  public isEditorShown = true;
+  public isRenameButtonShown = true;
 
-  ngOnInit(): void {
+  public toggleEditor() {
+    this.isEditorShown = !this.isEditorShown;
   }
 
+  public toggleRenameButton() {
+    this.isRenameButtonShown = !this.isRenameButtonShown;
+  }
 }
