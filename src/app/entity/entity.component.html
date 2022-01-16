@@ -3,7 +3,7 @@
     <app-editor *ngIf="isEditorShown" [(value)]="header"></app-editor>
   </div>
   <div>
-    <button *ngIf="isRenameButtonShown" #renameButton>rename</button>
+    <button *ngIf="isRenameButtonShown" editorRenameButton>rename</button>
   </div>
   <button (click)="toggleEditor()">toggle the editor</button>
   <button (click)="toggleRenameButton()">toggle the renameButton</button>

@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Optional, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { EditorWrapperComponent } from '../editor-wrapper/editor-wrapper.component';
 
 @Component({
   selector: 'app-editor',
@@ -7,6 +8,17 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./editor.component.scss']
 })
 export class EditorComponent {
+  constructor(
+    @Optional()
+    private readonly editorWrapperComponent?: EditorWrapperComponent,
+  ) {
+    if (this.editorWrapperComponent) {
+      this.editorWrapperComponent.isEditorOpenChange.subscribe(value => {
+        this.toggleEditInput(value);
+      });
+    }
+  }
+
   @Input()
   public set value(_value: string) {
     this._value.setValue(_value);
@@ -15,19 +27,16 @@ export class EditorComponent {
   @Output()
   public valueChange = new EventEmitter<string>();
 
-  @Output()
-  public editToggled = new EventEmitter<boolean>();
-
   public _value = new FormControl('');
 
-  public isEdit: boolean = false;
+  public isEditorOpen: boolean = false;
 
-  constructor() { }
-
-  public toggleEditInput(shouldEnableEdit: boolean): void {
-    this.isEdit = shouldEnableEdit;
-    this.editToggled.emit(shouldEnableEdit);
-    if (!shouldEnableEdit) {
+  public toggleEditInput(isEditorOpen: boolean): void {
+    this.isEditorOpen = isEditorOpen;
+    if (this.editorWrapperComponent) {
+      this.editorWrapperComponent.isRenameButtonDisplayedChange.next(isEditorOpen);
+    }
+    if (!isEditorOpen) {
       this.valueChange.emit(this._value.value);
     }
   }

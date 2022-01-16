@@ -1,12 +1,12 @@
 <p>editor works!</p>
 <div
-  *ngIf="!isEdit"
+  *ngIf="!isEditorOpen"
   (click)="toggleEditInput(true)"
 >
   {{ _value.value }}
 </div>
 <input
-  [type]="isEdit ? 'type' : 'hidden'"
+  [type]="isEditorOpen ? 'type' : 'hidden'"
   (focusout)="toggleEditInput(false)"
   (keyup.enter)="toggleEditInput(false)"
   [formControl]="_value"
